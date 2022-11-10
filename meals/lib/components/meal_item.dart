@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import '../models/meal.dart';
 import 'package:flutter/material.dart';
 import '../utils/app_routes.dart';
@@ -8,10 +10,18 @@ class MealItem extends StatelessWidget {
   final Meal meal;
 
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context)
+        .pushNamed(
       AppRoutes.MEAL_DETAIL,
       arguments: meal,
-    );
+    )
+        .then((result) {
+      if (result == null) {
+        print('Sem resultado');
+      } else {
+        print('O nome da refeição é $result');
+      }
+    });
   }
 
   @override
